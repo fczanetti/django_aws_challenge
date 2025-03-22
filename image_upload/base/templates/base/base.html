@@ -12,5 +12,45 @@
         <input type="file" id="image" name="image">
         <button type="submit">Send</button>
     </form>
+    <p id="downloadMessage"></p>
+    <a id="downloadUrl" href=""></a>
+
+    <script>
+        const downloadMessage = document.getElementById("downloadMessage")
+        const urlElement = document.getElementById("downloadUrl")
+        const fileName = '{{ filename }}';
+        let executionCount = 0;
+        const maxExecutions = 5;
+
+        if (fileName !== "no_file") {
+            downloadMessage.textContent = "Aguarde o link para download"
+            let intervalId;
+            function getUrl() {
+                fetch('{% url "base:download_url" filename=filename %}', 
+                    {"method": 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                })
+                .then(data => {
+                    if (JSON.parse(data).url) {
+                        urlElement.textContent = "Download";
+                        urlElement.href = JSON.parse(data).url;
+                        downloadMessage.textContent = "";
+                        clearInterval(intervalId);
+                    }
+                })
+
+                executionCount++;
+                if (executionCount >= maxExecutions) {
+                    clearInterval(intervalId);
+                }
+            }
+
+            intervalId = setInterval(getUrl, 8000);
+        }
+    </script>
+
 </body>
 </html>

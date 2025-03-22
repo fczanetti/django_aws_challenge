@@ -125,3 +125,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_GATEWAY_URL = config("API_GATEWAY_URL", default="http://fake.url")
+
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_BUCKET_NAME = config("AWS_BUCKET_NAME")
