@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {display: flex; height: 100dvh; flex-direction: column;}
+        form {margin: auto; display: flex; flex-direction: column; text-align: center;}
+        label {margin-bottom: 30px; font-size: x-large;}
+        input {margin-bottom: 30px;}
+        button {background-color: green; padding: 8px; border-radius: 8px; width: 150px; align-self: center; color: white; border: none;}
+        button:hover {background-color: rgb(1, 173, 1); cursor: pointer;}
+        #downloadUrl {background-color: green; padding: 5px; border-radius: 8px; width: 100px; align-self: center; color: white; display: none;}
+        #downloadUrl:hover {background-color: rgb(1, 173, 1);}
+    </style>
     <title>Form</title>
 </head>
 <body>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="image">Choose an image</label>
+        <label for="image">Escolha uma imagem</label>
         <input type="file" id="image" name="image">
-        <button type="submit">Send</button>
+        <button type="submit">Redimensionar</button>
+        <p id="downloadMessage"></p>
+        <a id="downloadUrl" href=""></a>
     </form>
-    <p id="downloadMessage"></p>
-    <a id="downloadUrl" href=""></a>
 
     <script>
         const downloadMessage = document.getElementById("downloadMessage")
@@ -38,6 +48,7 @@
                         urlElement.textContent = "Download";
                         urlElement.href = JSON.parse(data).url;
                         downloadMessage.textContent = "";
+                        urlElement.style.display = "unset";
                         clearInterval(intervalId);
                     }
                 })

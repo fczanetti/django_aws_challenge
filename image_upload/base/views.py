@@ -24,11 +24,15 @@ def home(request):
         url = settings.API_GATEWAY_URL
         image = request.FILES.get("image")
         
+        if not image:
+            return render(request, "base/base.html", {"filename": filename})
+
         filename = image.name
         filename = f"{datetime.strftime(datetime.now(), '%Y%m%d_%H%M%S')}_{filename}"
 
         image_content = image.read()
         headers = {"Content-Type": "application/png"}
+
         try:
             requests.post(url, data=image_content, headers=headers, params={"filename": filename})
         except Exception as e:
