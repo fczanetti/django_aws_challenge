@@ -4,4 +4,14 @@ This is the "Django part" of the AWS Challenge completed. It consists in a simpl
 
 The complete flow and details are better described on [this repository](https://github.com/fczanetti/aws_challenge).
 
-To run this project, simply create a new `.env` file with the credentials listed in `contrib/env-sample` and install the libraries listed in `requirements.txt`. This is enough to run the single page.
+To run this project, simply create a new use the commands bellow from the root of the project:
+
+```
+cp contrib/env-sample .env
+python -m venv .venv
+source .venv/bin/activate
+python manage.py migrate
+python manage.py runserver
+```
+
+This should be enough to run the single page in `http://127.0.0.1:8000`.
