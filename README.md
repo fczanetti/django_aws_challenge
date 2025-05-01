@@ -4,7 +4,7 @@ This is the "Django part" of the AWS Challenge completed. It consists in a simpl
 
 The complete flow and details are better described on [this repository](https://github.com/fczanetti/aws_challenge).
 
-To run this project, simply create a new use the commands bellow from the root of the project:
+To run this project, simply use the commands bellow from the root of the project:
 
 ```
 cp contrib/env-sample .env
